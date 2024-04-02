@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h4>회원정보</h4>
+<br>
+{% include 'header.html' %}
+<table border='1'>
+	<tr>
+		<th>회원ID</th>
+		<th>회원명</th>
+		<th>성별</th>
+		<th>주소</th>
+	</tr>
+	{% if list == () %}
+	<tr><td colspan='4'>현재 저장된 데이터가 없습니다.</td></tr>
+	{% else %}
+	{% for e in list %}
+	<tr>
+		<td>{{e.e_id}}</td>
+		<td>{{e.e_name}}</td>
+		<td>{{e.gen}}</td>
+		<td>{{e.addr}}</td>
+	</tr>
+	{% endfor %}
+	{% endif %}
+</table>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link type="text/css" rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div id="map" style="width: 100%; height: 350px;"></div>
+
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=77d5909c04b73aa6f49db51b07a62070"></script>
+	<script>
+		var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+		var mapOption = {
+			center : new kakao.maps.LatLng(36.32503, 127.4089), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
+		};
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+		// 마커가 표시될 위치입니다 
+		var markerPosition = new kakao.maps.LatLng(36.32503, 127.4089);
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			position : markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+
+		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+		// marker.setMap(null);
+	</script>
+	<script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
+
+	<script type="module">
+
+			import * as THREE from 'three';
+
+			let camera, scene, renderer;
+			let mesh;
+
+			init();
+			animate();
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 100 );
+				camera.position.z = 2;
+
+				scene = new THREE.Scene();
+
+				const texture = new THREE.TextureLoader().load( 'textures/crate.gif' );
+				texture.colorSpace = THREE.SRGBColorSpace;
+
+				const geometry = new THREE.BoxGeometry();
+				const material = new THREE.MeshBasicMaterial( { map: texture } );
+
+				mesh = new THREE.Mesh( geometry, material );
+				scene.add( mesh );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				mesh.rotation.x += 0.005;
+				mesh.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+</body>
+</html>
