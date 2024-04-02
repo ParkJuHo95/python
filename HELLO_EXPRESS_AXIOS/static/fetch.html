@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="./jquery-3.7.1.js"></script>
+	<script type="text/javascript">
+		function my_fetch() {
+			var params = {
+				'menu': '짜장'
+			};
+			fetch('/fetch', {
+				method: 'post',
+				headers: {
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify(params)
+			}).then(res => {
+				console.log(res);
+				return res.json();
+			}).then(resp => {
+				console.log(resp);
+				console.log(resp.menu);
+			}).catch(err => {
+				console.log("err : " + err)
+			});
+		}
+	</script>
+</head>
+
+<body>
+	<a href="javascript:my_fetch()">Fetch</a>
+</body>
+
+</html>

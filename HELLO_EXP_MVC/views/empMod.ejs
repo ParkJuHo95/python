@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h4>Emp_Mod</h4>
+	
+	<form action="/empModAct">
+		<table border>
+			<tr>
+				<th>사번</th>
+				<td><input type="text" name="e_id" value="<%=emp.e_id%>" readonly/></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="e_name" value="<%=emp.e_name%>"/></td>
+			</tr>				
+			<tr>
+				<th>성별</th>
+				<td><input type="text" name="gen" value="<%=emp.gen%>"/></td>
+			</tr>				
+			<tr>
+				<th>주소</th>
+				<td><input type="text" name="addr" value="<%=emp.addr%>"/></td>
+			</tr>				
+			<tr>
+				<td colspan='4'>
+					<button type="submit" class="update">확인</button>
+					<button class="cancle">취소</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script type="text/javascript">
+		document.querySelector('.cancle').addEventListener('click',function(){
+			location.href = `/empList`;
+		})
+	</script>
+</body>
+</html>

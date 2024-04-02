@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+EJS
+<br>
+name : <%=a %>
+
+
+<br>
+<%
+	for(var i=0;i<b.length;i++){ %>
+		name : <%= b[i]%><br>
+	<%}
+%>
+<table border>
+	<tr>
+		<th>사번</th>
+		<th>이름</th>
+		<th>성별</th>
+		<th>주소</th>
+	</tr>
+<%
+	for(var i=0;i<c.length;i++){
+%>
+	<tr>
+		<td><%=c[i].e_id %></td>
+		<td><%=c[i].e_name %></td>
+		<td><%=c[i].gen %></td>
+		<td><%=c[i].addr %></td>
+	</tr>		
+<%
+	}
+%>
+</table>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	<%
+		if(cnt>0){
+	%>
+		alert('정삭적으로 수정되었습니다.')
+		location.href="/empList";			
+	<%
+		} else {
+	%>
+		history.back();
+	<%
+		}
+	%>
+</script>
+</html>

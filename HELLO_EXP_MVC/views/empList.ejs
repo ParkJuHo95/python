@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+	table{
+		text-align: center;
+	}
+</style>
+<body>
+	<h4>Emp_List</h4>
+	<table border>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+		<%for(var i=0;i<list.length;i++){ %>
+		<tr>
+			<td><a href="/empOne?e_id=<%=list[i].e_id %>"><%=list[i].e_id %></a></td>
+			<td><%=list[i].e_name %></td>
+			<td><%=list[i].gen %></td>
+			<td><%=list[i].addr %></td>
+		</tr>
+		<%} %>
+		<tr>
+			<td colspan='4'>
+				<button class="insert">추가</button>
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		document.querySelector(".insert").addEventListener("click",function(){
+			location.href = "/empAdd";
+		})
+	</script>
+</body>
+</html>

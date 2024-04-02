@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+	table{
+		text-align: center;
+	}
+</style>
+<body>
+	<h4>Emp_One</h4>
+	<table border>
+		<tr>
+			<th>사번</th>
+			<td><%=emp.e_id %></td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td><%=emp.e_name %></td>
+		</tr>				
+		<tr>
+			<th>성별</th>
+			<td><%=emp.gen %></td>
+		</tr>				
+		<tr>
+			<th>주소</th>
+			<td><%=emp.addr %></td>
+		</tr>				
+		<tr>
+			<td colspan='4'>
+				<button class="update">수정</button>
+				<button class="delete">삭제</button>
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		var td = document.querySelector('td');
+		var id = td.textContent;
+		document.querySelector('.update').addEventListener('click',function(){
+			location.href = `/empModify?e_id=${id}`;
+		})
+
+		document.querySelector('.delete').addEventListener('click',function(){
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href = `/empDelete?e_id=${id}`;
+			}
+		})
+	</script>
+</body>
+</html>

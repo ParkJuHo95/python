@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+EMP
+<table border>
+	<thead>
+		<th>사번</th>
+		<th>이름</th>
+		<th>성별</th>
+		<th>주소</th>
+	</thead>
+	<tbody id="ListBody">
+		
+	</tbody>
+</table>
+<hr>
+<table border>
+	<tr>
+		<th>사번</th>
+		<td><input type="text" id="e_id" /></td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" id="e_name" /></td>
+	</tr>
+	<tr>
+		<th>성별</th>
+		<td><input type="text" id="gen" /></td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td><input type="text" id="addr" /></td>
+	</tr>
+	<tr>
+		<td colspan='2'>
+			<input type="button" value="추가" onclick="fn_add()"/>
+			<input type="button" value="수정" onclick="fn_mod()"/>
+			<input type="button" value="삭제" onclick="fn_del()"/>
+		</td>
+	</tr>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	fn_list();
+	function fn_list(){
+		axios.get('/empList'
+		).then(function (response) {
+			var empList = response.data
+			var empList = empList.list;
+			var listBody = document.querySelector("#ListBody");
+			var trs = "";
+			for(let i in empList){
+				trs += "<tr>"
+				trs += `<td><a href="javascript:fn_detail(${empList[i].e_id})">${empList[i].e_id}</a></td>`
+				trs += `<td>${empList[i].e_name}</td>`
+				trs += `<td>${empList[i].gen}</td>`
+				trs += `<td>${empList[i].addr}</td>`
+				trs += "</tr>"
+			}
+			listBody.innerHTML = trs;
+		}).catch(function (error) {
+			console.log(error);
+		});
+	};
+	
+	function fn_detail(e_id){
+		axios.get(`/empSelectOne?e_id=${e_id}`
+		).then(function (response) {
+			var emp = response.data
+			console.log(emp);
+			document.querySelector('#e_id').value = emp.e_id;
+			document.querySelector('#e_name').value = emp.e_name;
+			document.querySelector('#gen').value = emp.gen;
+			document.querySelector('#addr').value = emp.addr;
+		}).catch(function (error) {
+			console.log(error);
+		});
+	}
+	
+	function fn_reset(){
+		document.querySelector("#e_id").value ="";
+		document.querySelector("#e_name").value="";
+		document.querySelector("#gen").value="";
+		document.querySelector("#addr").value="";
+	}
+	function fn_add(){
+		var my_id = document.querySelector("#e_id").value;
+		var my_name = document.querySelector("#e_name").value;
+		var my_gen = document.querySelector("#gen").value;
+		var my_addr = document.querySelector("#addr").value;
+		
+		var data = {
+			e_id : my_id,
+			e_name : my_name,
+			gen : my_gen,
+			addr : my_addr
+		};
+		axios.post('/empAdd',data
+		).then( resp => {
+			var cnt = resp.data.cnt;
+			if(cnt > 0){
+				alert('정상적으로 추가되었습니다.');
+				fn_list();
+				fn_reset();
+			}else{
+				alert('추가 실패');
+			}
+		}).catch( err => {
+			console.log(err);
+		});
+	};
+	
+	function fn_mod(){
+				var my_id = document.querySelector("#e_id").value;
+		var my_name = document.querySelector("#e_name").value;
+		var my_gen = document.querySelector("#gen").value;
+		var my_addr = document.querySelector("#addr").value;
+		
+		var data = {
+			e_id : my_id,
+			e_name : my_name,
+			gen : my_gen,
+			addr : my_addr
+		};
+		axios.post('/empMod',data
+		).then( resp => {
+			var cnt = resp.data.cnt;
+			if(cnt > 0){
+				alert('정상적으로 수정되었습니다.');
+				fn_list();
+				fn_reset();
+			}else{
+				alert('수정 실패');
+			}
+		}).catch( err => {
+			console.log(err);
+		});
+	};
+	
+	function fn_del(){
+		var my_id = document.querySelector("#e_id").value;
+		var data = {
+			e_id : my_id,
+		};
+		axios.post('/empDel',data
+		).then( resp => {
+			var cnt = resp.data.cnt;
+			if(cnt > 0){
+				alert('정상적으로 삭제되었습니다.');
+				fn_list();
+				fn_reset();
+			}else{
+				alert('삭제 실패');
+			}
+		}).catch( err => {
+			console.log(err);
+		});
+	};
+</script>
+</body>
+</html>
