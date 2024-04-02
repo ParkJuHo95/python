@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h4>메뉴 추천 화면</h4>
+	<table border>
+		<tr>
+			<td>그제 메뉴</td>
+			<td><input id='it_bday' type='text'/></td>
+		</tr>
+		<tr>
+			<td>
+				<button>어제 메뉴</button>
+			</td>
+			<td><input id='it_yester' type='text'/></td>
+		</tr>
+		<tr>
+			<td>추천 메뉴</td>
+			<td>
+				<input type='text' id='it_recom' readonly/>
+			</td>
+		</tr>
+	</table>
+<script src='./resources/jquery-3.7.1.js'></script>
+<script>
+	$('button').on('click',function(){
+		var menu = $('#it_yester').val()
+		fetch('http://localhost:5000/fetch',{
+			method : 'post',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			body : JSON.stringify({
+				menu : menu
+			})
+		}).then(resp=>{
+			return resp.json()
+		}).then(resp=>{
+			var menu = resp.menu;
+			console.log(menu);
+			$(it_recom).val(menu);
+		})
+	})	
+</script>
+</body>
+</html>
