@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	가위바위보
+	<table border=1>
+		<tr>
+			<td>나</td>
+			<td><input type='text' id='itMine'></td>
+		</tr>
+		<tr>
+			<td>컴</td>
+			<td><input type='text' id='itCom'></td>
+		</tr>
+		<tr>
+			<td>결과</td>
+			<td><input type='text' id='itResult'></td>
+		</tr>
+		<tr>
+			<td colspan='2'><input type='button' value='게임하기' onclick="myclick()"> </td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		function myclick() {
+			var mine = document.querySelector('#itMine').value;
+			var com = document.querySelector('#itCom');
+			var result = document.querySelector('#itResult');
+			let ranNum = Math.random();
+			if (ranNum < 0.33333333) {
+				com.value = "가위";
+			} else if(ranNum < 0.66666666) {
+				com.value = "바위";
+			} else {
+				com.value = "보";
+			}
+
+			if (mine == com.value) {
+				result.value = "비김";
+			} else if(
+				mine == "가위" && com.value == "보"|| 		
+				mine == "바위" && com.value == "가위"||		
+				mine == "보" && com.value == "바위" 		
+			) {
+				result.value = "승리";
+			} else {
+				result.value = "패배";
+			}
+			
+			
+		}
+	</script>
+</body>
+</html>

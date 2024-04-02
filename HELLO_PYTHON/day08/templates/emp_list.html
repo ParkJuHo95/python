@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	td {
+		text-align: center
+	}
+</style>
+</head>
+<body>
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspEMP_LIST
+	<table border="1">
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+		{% if list == () %}
+		<tr><td colspan='4'>현재 저장된 데이터가 없습니다.</td></tr>
+		{% else %}
+		{% for e in list %}
+		<tr>
+			<td><a href="./emp_detail?e_id= {{e.e_id}}">{{e.e_id}}</a></td>
+			<td>{{e.e_name}}</td>
+			<td>{{e.gen}}</td>
+			<td>{{e.addr}}</td>
+		</tr>
+		{% endfor %}
+		{% endif %}
+	</table>
+	<button>추가</button>
+	
+	<script type="text/javascript">
+		document.querySelector('button').addEventListener('click',function(){
+			location.href = "emp_add"
+		})
+	</script>
+</body>
+</html>

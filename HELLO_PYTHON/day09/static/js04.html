@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+input[type=text] {
+	width: 57px
+}
+</style>
+</head>
+<body>
+
+	<table border=1>
+		<tr>
+			<td>나</td>
+			<td><input type='text' id='it_mine'></td>
+		</tr>
+		<tr>
+			<td>컴</td>
+			<td><input type='text' id='it_com'></td>
+		</tr>
+		<tr>
+			<td>결과</td>
+			<td><input type='text' id='it_result'></td>
+		</tr>
+		<tr>
+			<td>승리횟수</td>
+			<td><input type='text' id='it_win' value='0'></td>
+		</tr>
+		<tr>
+			<td>게임횟수</td>
+			<td><input type='text' id='it_game' value='0'></td>
+		</tr>
+		<tr>
+			<td colspan='2'><input type='button' value='게임하기'
+				onclick="myclick()"></td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		var winCount = 0;
+		var gameCount = 0;
+		function myclick() {
+			gameCount++;
+			var mine = document.querySelector('#it_mine').value;
+			var com = document.querySelector('#it_com');
+			var result = document.querySelector('#it_result');
+			let ranNum = Math.random();
+			if (ranNum > 0.5) {
+				com.value = "짝";
+			} else {
+				com.value = "홀";
+			}
+
+			if (mine == com.value) {
+				result.value = "승리";
+				winCount++;
+			} else {
+				result.value = "패배";
+			}
+			
+			document.getElementById('it_win').value = winCount;
+			document.getElementById('it_game').value = gameCount;
+		}
+	</script>
+</body>
+</html>

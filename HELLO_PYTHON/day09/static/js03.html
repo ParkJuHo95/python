@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#it_dan {
+	width: 30px;
+}
+</style>
+
+</head>
+<body>
+
+	<table border='1'>
+		<tr>
+			<td>출력단수</td>
+			<td><input type='text' id='it_dan'></td>
+		</tr>
+		<tr>
+			<td colspan='2'><input type='button' value='출력하기'
+				onclick="myclick()"></td>
+		</tr>
+		<tr>
+			<td colspan='2'><textarea id='ta' rows='20' cols='20'></textarea>
+			</td>
+
+		</tr>
+	</table>
+
+
+	<script type="text/javascript">
+		let area = document.querySelector('#ta');
+		function myclick() {
+			var danNum = document.querySelector('#it_dan').value;
+// 			area.textContent = danNum + " * " + 1 + " = " + (danNum*1)+"\n";
+// 			area.textContent = `${danNum} * 1 = ${(danNum*1)}\n`;
+			area.textContent = "";
+			for (let i = 1; i < 10; i++) {
+				area.textContent += danNum + " * " + i + " = " + (danNum*i)+"\n"; 
+			}
+		}
+	</script>
+</body>
+</html>

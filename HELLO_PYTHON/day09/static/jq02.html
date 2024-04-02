@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#ita,#itb,#itc {
+		width : 30px;
+	}
+	input {
+		text-align:center;
+	}
+</style>
+</head>
+<body>
+<input type='text' id="ita">
++
+<input type='text' id="itb">
+<!-- <input type='button' value="=" onclick="myclick()"> -->
+<input type='button' value="=">
+<input type='text' id="itc">
+
+
+
+<script type="text/javascript">
+	let a = document.querySelector('#ita');
+	let b = document.querySelector('#itb');
+	let c = document.querySelector('#itc');
+// 	function myclick(){
+	document.querySelector('input[type=button]').addEventListener('click',function(){
+		var aNum = parseInt(a.value);
+		var bNum = parseInt(b.value);
+		c.value = aNum+bNum;
+	})
+// 	}
+</script>
+</body>
+</html>

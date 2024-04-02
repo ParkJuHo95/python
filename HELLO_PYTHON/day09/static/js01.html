@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="mydiv">Good Morning</div>
+<!-- <input type='button' value='CLICK' onclick="myclick()"> -->
+<input type='button' value='CLICK'>
+
+<script type="text/javascript">
+// 	let mydiv = document.querySelector('#mydiv');
+	let mydiv = document.getElementById('mydiv');
+	let test = document.querySelector('input');
+	document.querySelector('input').addEventListener('click',function(){
+		if(mydiv.textContent == "Good Morning") {
+			mydiv.innerText = "Good Evening";
+		} else {
+			mydiv.innerText = "Good Morning";
+		}
+	});
+// 	function myclick(){
+// 		mydiv.innerText = "Good Evening";
+// 	}
+</script>
+</body>
+</html>

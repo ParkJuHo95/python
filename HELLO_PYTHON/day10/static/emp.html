@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+#e_id, #e_name, #gen, #addr {
+	width: 50px;
+}
+</style>
+
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		fn_list();
+		
+		$('#btn_add').on('click',function(){
+			fn_add();
+		})
+		$('#btn_mod').on('click',function(){
+			fn_mod();
+		})
+		$('#btn_del').on('click',function(){
+			fn_del();
+		})
+	});
+	
+	function fn_list(){
+		$.ajax({
+			type : 'post',
+			url : '/ajax_list',
+			dataType : "json",
+			contentType : 'application/json',
+			success : function(res){
+				list = res.emps;
+				str = "";
+				for(let i=0; i<list.length; i++) {
+// 					str += "<tr>";
+// 					str += "<td>"+res.emps[i].e_id+"</td>"
+// 					str += "<td>"+res.emps[i].e_name+"</td>"
+// 					str += "<td>"+res.emps[i].gen+"</td>"
+// 					str += "<td>"+res.emps[i].addr+"</td>"
+// 					str += "</tr>";
+					var e = list[i];
+					str += `<tr>;
+					<td><a href='javascript:fn_one(${e.e_id})'> ${e.e_id} </a></td>
+					<td> ${e.e_name} </td>
+					<td> ${e.gen} </td>
+					<td> ${e.addr} </td></tr>
+					`;
+				}
+				$('#my_tbody').empty()
+				$('#my_tbody').append(str)
+			},
+			error : function(xhr){
+				console.log(xhr.status)
+			}
+		})
+	}
+	
+	function fn_one(e_id){
+		console.log(e_id);
+		$.ajax({
+			data : JSON.stringify({'e_id' : e_id}),
+			type : 'post',
+			url : '/ajax_one',
+			dataType : "json",
+			contentType : 'application/json',
+			success : function(res){
+				var vo = res.emp;
+				console.log(res)
+				$('#e_id').val(vo.e_id);
+				$('#e_name').val(vo.e_name);
+				$('#gen').val(vo.gen);
+				$('#addr').val(vo.addr);
+			},
+			error : function(xhr){
+				console.log(xhr.status)
+			}
+		})
+	}
+	
+	function fn_add(){
+		param = {
+				'e_id' : $('#e_id').val(),
+				'e_name' : $('#e_name').val(),
+				'gen' : $('#gen').val(),
+				'addr' : $('#addr').val()
+		}
+		$.ajax({
+			type : 'post',
+			data : JSON.stringify(param),
+			url : '/ajax_add',
+			dataType : 'json',
+			contentType : 'application/json',
+			success : function(res){
+				var cnt = res.cnt;
+				if(cnt == 1) {
+					alert('성공적으로 추가했습니다.');
+					$('#e_id').val("");
+					$('#e_name').val("");
+					$('#gen').val("");
+					$('#addr').val("");
+					fn_list();
+				} else if (cnt == -20) {
+					alert('이미 존재하는 사번입니다.')
+				} else {
+					alert('추가 실패...');
+				}
+			},
+			error : function(xhr){
+				console.log(xhr.status)
+			}
+		})
+	}
+
+	function fn_mod(){
+		param = {
+				'e_id' : $('#e_id').val(),
+				'e_name' : $('#e_name').val(),
+				'gen' : $('#gen').val(),
+				'addr' : $('#addr').val()
+		}
+		$.ajax({
+			data : JSON.stringify(param),
+			type : 'post',
+			url : '/ajax_mod',
+			dataType : 'json',
+			contentType : 'application/json',	
+			success : function(res){
+				var cnt = res.cnt;
+				if(cnt == 1) {
+					alert('성공적으로 수정했습니다.');
+					$('#e_id').val("");
+					$('#e_name').val("");
+					$('#gen').val("");
+					$('#addr').val("");
+					fn_list();
+				} else {
+					alert('수정 실패...');
+				}
+			},
+			error : function(xhr){
+				console.log(xhr.status)
+			}
+		})
+	}
+	
+	function fn_del(){
+		param = {
+			'e_id' : $('#e_id').val()
+			}
+		var flag = confirm('삭제한 데이터는 복구할 수 없습니다. 정말 삭제하시겠습니까?')
+		if(!flag){
+			return;
+		}
+		$.ajax({
+			data : JSON.stringify(param),
+			type : 'post',
+			url : '/ajax_del',
+			dataType : 'json',
+			contentType : 'application/json',	
+			success : function(res){
+				var cnt = res.cnt
+				if(cnt == 1) {
+					alert('성공적으로 삭제하였습니다.')
+					$('#e_id').val("");
+					$('#e_name').val("");
+					$('#gen').val("");
+					$('#addr').val("");
+					fn_list();
+				} else {
+					alert('삭제 실패...')
+				}
+			},
+			error : function(xhr){
+				console.log(xhr.status)
+			}
+		})
+	}
+	
+	
+	
+</script>
+</head>
+<body>
+
+	<table border=1>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+		<tbody id='my_tbody'>
+			<tr>
+				<td colspan=4>검색된 데이터가 없습니다</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table border=1>
+		<tr>
+			<th>사번</th>
+			<td><input type='text' id='e_id'></td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td><input type='text' id='e_name'></td>
+		</tr>
+		<tr>
+			<th>성별</th>
+			<td><input type='text' id='gen'></td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td><input type='text' id='addr'></td>
+		</tr>
+		<tr>
+			<td colspan='2'><input type='button' value='추가' id='btn_add'>
+				<input type='button' value='수정' id='btn_mod'> <input
+				type='button' value='삭제' id='btn_del'></td>
+		</tr>
+	</table>
+</body>
+</html>

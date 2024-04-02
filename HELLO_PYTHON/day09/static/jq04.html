@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+input[type=text] {
+	width: 57px
+}
+</style>
+<script src="./jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var winCount = 0;
+		var gameCount = 0;
+		$('input:button').click(function() {
+			gameCount++;
+			
+			var mine = $('#it_mine').val();
+			var com = $('#it_com');
+			var result = $('#it_result');
+			
+			let ranNum = Math.random();
+			
+			if (ranNum > 0.5) { com.val("짝"); } 
+			else { com.val("홀"); }
+
+			if (mine == com.val()) {
+				result.val("승리");
+				winCount++;
+			} else {
+				result.val("패배");
+			}
+
+			$('#it_win').val(winCount);
+			$('#it_game').val(gameCount);
+		});
+	});
+</script>
+</head>
+<body>
+
+	<table border=1>
+		<tr>
+			<td>나</td>
+			<td><input type='text' id='it_mine'></td>
+		</tr>
+		<tr>
+			<td>컴</td>
+			<td><input type='text' id='it_com'></td>
+		</tr>
+		<tr>
+			<td>결과</td>
+			<td><input type='text' id='it_result'></td>
+		</tr>
+		<tr>
+			<td>승리횟수</td>
+			<td><input type='text' id='it_win' value='0'></td>
+		</tr>
+		<tr>
+			<td>게임횟수</td>
+			<td><input type='text' id='it_game' value='0'></td>
+		</tr>
+		<tr>
+			<td colspan='2'><input type='button' value='게임하기'></td>
+		</tr>
+	</table>
+</body>
+</html>

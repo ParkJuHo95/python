@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	td {
+		text-align : center;
+	}
+</style>
+</head>
+<body>
+	<table border="1">
+		<tr><th>사번</th><td>{{ vo.e_id }}</td></tr>
+		<tr><th>이름</th><td>{{ vo.e_name }}</td></tr>
+		<tr><th>성별</th><td>{{ vo.gen }}</td></tr>
+		<tr><th>주소</th><td>{{ vo.addr }}</td></tr>
+		<tr><td><button>수정</button></td><td><button>삭제</button></td></tr>
+	</table>
+</body>
+</html>

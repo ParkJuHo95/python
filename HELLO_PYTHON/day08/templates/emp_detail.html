@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	td {
+		text-align : center;
+	}
+</style>
+</head>
+<body>
+	<table border="1">
+		<tr><th>사번</th><td>{{ vo.e_id }}</td></tr>
+		<tr><th>이름</th><td>{{ vo.e_name }}</td></tr>
+		<tr><th>성별</th><td>{{ vo.gen }}</td></tr>
+		<tr><th>주소</th><td>{{ vo.addr }}</td></tr>
+		<tr><td><button id="up">수정</button><td><button id="del">삭제</button></td></td></tr>
+	</table>
+	
+	<script type="text/javascript">
+		document.querySelector('#up').addEventListener('click',function(){
+			location.href = "emp_mod?e_id={{vo.e_id}}";
+		});
+
+		document.querySelector('#del').addEventListener('click',function(){
+			if(confirm('삭제하신 정보는 복구할 수 없습니다. 정말 삭제하시겠습니까?')){
+				location.href = "emp_delete?e_id={{vo.e_id}}";
+			} else {
+				return;
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello, World!</title>
+    </head>
+	<body>
+		<h4>Holl</h4>	
+		<table border="1px">
+			<tr>
+				<td>나</td>
+				<td>
+					<input id="it_mine" type="text"/>
+				</td>
+			</tr>
+			<tr>
+				<td>컴</td>
+				<td>
+					<input id="it_com" type="text"/>
+				</td>
+			</tr>
+			<tr>
+				<td>결과</td>
+				<td>
+					<input id="it_result" type="text"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2'>
+					<input type='button' id="btn" value="게임하기"/>
+				</td>
+			</tr>
+		</table>
+    </body>
+	<script>
+		document.querySelector('#btn').addEventListener('click',function(){
+			let mine = document.querySelector('#it_mine');
+			let com = document.querySelector('#it_com');
+			let result = document.querySelector('#it_result');
+			let myValue = mine.value;
+			let myanswer = "";
+			if(myValue=="홀"){
+				myanswer="홀";
+			}else{
+				myanswer="짝";
+			}
+			mine.value = myanswer;
+			
+			let comValue = Math.random();
+			let comAnswer = "";
+			if(comValue > 0.5){
+				comAnswer = "홀";
+			} else {
+				comAnswer = "짝";
+			}
+			com.value = comAnswer;
+			
+			gameResult = "";
+			if(myanswer==comAnswer){
+				gameResult ="승리"
+			} else {
+				gameResult ="패배"
+			}
+			result.value = gameResult;
+			
+		});
+	</script>
+</html>

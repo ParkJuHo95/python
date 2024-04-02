@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+td {
+	text-align: center;
+}
+
+#it {
+	text-align: right;
+}
+</style>
+
+
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		let txtArea = $('#it');
+// 		let btns = $('input:button');
+// 		for (let i = 0; i < btns.length- 1; i++) {
+// 			btns.eq(i).on('click', function() {
+// 				txtArea.val(txtArea.val()+btns.eq(i).val())
+// 			});
+// 		}
+
+// 		$('#btn_call').on('click', function() {
+// 			alert("Calling....\nTo : " + txtArea.val());
+// 		});
+		
+		////////////////////////////////////////////////////
+		
+		$('.btn').click(function(){
+			myclick(this);
+		});
+		
+		$('#btn_call').on('click', function() {
+			mycall();
+		});
+	});
+	
+	///////////////////////////////////////////////////////
+		function myclick(obj){
+			var obj_it = $('#it');
+			var str_new = $(obj).val();
+			var str_old = obj_it.val();
+
+			obj_it.val(str_old + str_new);
+		}
+
+		function mycall(){
+			var str_tel = $('#it').val();
+			alert("calling... \n" + str_tel)
+		}
+</script>
+</head>
+<body>
+
+	<table border="1">
+		<tr>
+			<td colspan='3'><input type='text' id='it'></td>
+		</tr>
+		<tr>
+			<td><input type='button' class='btn' value='1'></td>
+			<td><input type='button' class='btn' value='2'></td>
+			<td><input type='button' class='btn' value='3'></td>
+		</tr>
+		<tr>
+			<td><input type='button' class='btn' value='4'></td>
+			<td><input type='button' class='btn' value='5'></td>
+			<td><input type='button' class='btn' value='6'></td>
+		</tr>
+		<tr>
+			<td><input type='button' class='btn' value='7'></td>
+			<td><input type='button' class='btn' value='8'></td>
+			<td><input type='button' class='btn' value='9'></td>
+		</tr>
+		<tr>
+			<td><input type='button' class='btn' value='0'></td>
+			<td colspan='2'><input type='button' id='btn_call' value='☎'>
+			</td>
+		</tr>
+
+	</table>
+
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	td {
+		text-align : center;
+	}
+</style>
+</head>
+<body>
+	<table border="1">
+		<form name='frm' action="emp_add_act">
+		<tr><th>사번</th><td><input name="e_id" type='text'></td></tr>
+		<tr><th>이름</th><td><input name="e_name" type='text'></td></tr>
+		<tr><th>성별</th><td><input name="gen" type='text'></td></tr>
+		<tr><th>주소</th><td><input name="addr" type='text'></td></tr>
+		</form>
+	</table>
+	<input type="button" value="확인" onclick="fn_act()">
+	
+	<script type="text/javascript">
+		function fn_act(){
+			document.frm.submit()
+		}
+		
+	</script>
+</body>
+</html>

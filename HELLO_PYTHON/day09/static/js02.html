@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#ita, #itb, #itc {
+	width: 30px;
+}
+
+input {
+	text-align: center;
+}
+</style>
+
+<script src="./jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('input:button').on('click', function() {
+			var aNum = parseInt($('#ita').val());
+			var bNum = parseInt($('#itb').val());
+			$('#itc').val(aNum + bNum);
+		});
+	});
+</script>
+
+</head>
+<body>
+	<input type='text' id="ita"> +
+	<input type='text' id="itb">
+	<input type='button' value="=">
+	<input type='text' id="itc">
+</body>
+</html>

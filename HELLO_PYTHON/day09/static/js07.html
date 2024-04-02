@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	td{
+		text-align: center;
+	}
+	
+	#it {
+		text-align: right;
+	}
+</style>
+</head>
+<body>
+
+<table border="1">
+	<tr>
+		<td colspan='3'>
+			<input type='text' id='it'>
+		</td>
+	</tr>
+	<tr>
+		<td> <input type='button' class='btn' value='1' onclick="myclick(this)"> </td>
+		<td> <input type='button' class='btn' value='2' onclick="myclick(this)"> </td>
+		<td> <input type='button' class='btn' value='3' onclick="myclick(this)"> </td>
+	</tr>
+	<tr>
+		<td> <input type='button' class='btn' value='4' onclick="myclick(this)"> </td>
+		<td> <input type='button' class='btn' value='5' onclick="myclick(this)"> </td>
+		<td> <input type='button' class='btn' value='6' onclick="myclick(this)"> </td>
+	</tr>
+	<tr>
+		<td> <input type='button' class='btn' value='7' onclick="myclick(this)"> </td>
+		<td> <input type='button' class='btn' value='8' onclick="myclick(this)"> </td>
+		<td> <input type='button' class='btn' value='9' onclick="myclick(this)"> </td>
+	</tr>
+	<tr>
+		<td> <input type='button' class='btn' value='0' onclick="myclick(this)"> </td>
+		<td colspan='2'> <input type='button' id='btn_call' value='☎' onclick="mycall()"> </td>
+	</tr>
+	
+</table>
+
+
+<script type="text/javascript">
+// 	let txtArea = document.querySelector('#it');
+// 	let btns = document.querySelectorAll('input[type=button]');
+	
+// 	for(let i=0; i<btns.length-1; i++) {
+// 		btns[i].addEventListener('click',function(){
+// 			txtArea.value += (btns[i].value)
+// 		});
+// 	}
+	
+// 	document.querySelector('#btn_call').addEventListener('click',function(){
+// 		alert("Calling....\n"+txtArea.value);
+// 	});
+	function myclick(obj){
+		var obj_it = document.getElementById('it');
+		var str_new = obj.value;
+		var str_old = obj_it.value;
+		
+		obj_it.value = str_old + str_new;
+	}
+	
+	function mycall(){
+		var obj_it = document.getElementById('it');
+		var str_tel = obj_it.value;
+		alert("calling... \n" + str_tel)
+	}
+</script>
+</body>
+</html>
