@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	function my_ajax(){
+		var params = {
+				'menu':'짬뽕'
+		};
+		$.ajax({
+			type : 'POST',
+			url : '/ajax',
+			data : JSON.stringify(params),
+			dataType : 'json',
+			contentType : "application/json",
+			success : function(res){
+				console.log(res);
+			},
+			error : function(xhr){
+				console.log(xhr.satus)
+			}
+		});
+	}
+	
+		function my_fetch(){
+		var params = {
+				'menu':'짬뽕'
+		};
+		$.ajax({
+			type : 'POST',
+			url : '/ajax',
+			data : JSON.stringify(params),
+			dataType : 'json',
+			contentType : "application/json",
+			success : function(res){
+				console.log(res);
+			},
+			error : function(xhr){
+				console.log(xhr.satus)
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<a href = "javascript:my_ajax()">Ajax</a>
+	<br>
+	<a href = "javascript:my_fetch()">Fetch</a>
+</body>
+</html>

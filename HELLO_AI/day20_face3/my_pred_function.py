@@ -1,0 +1,25 @@
+from keras.utils import np_utils
+from keras.datasets import cifar10
+import numpy as np
+import tensorflow as tf
+import cv2
+
+def getNameByImage(img):
+    arr = [
+        {'lbl':0,'f':'00','n':'박주호'},
+        {'lbl':1,'f':'01','n':'박지원'},
+        {'lbl':2,'f':'02','n':'이미소'},
+        {'lbl':3,'f':'03','n':'하예종'}
+    ]
+    img = cv2.resize(img,(32,32))
+    img = np.reshape(img,(-1,32,32,3))/255
+    model = tf.keras.models.load_model('face.h5')
+    pred = model.predict(img)
+    myidx = np.argmax(pred)
+    return arr[myidx]['n']
+
+if __name__ == '__main__':
+    img = cv2.imread("132.png")
+    name = getNameByImage(img)
+    print(name)
+
